@@ -29,13 +29,70 @@ const audio = player?.querySelector('audio');
 const listeningDialog = document.createElement('dialog');
 listeningDialog.className = 'listening-dialog';
 listeningDialog.setAttribute('aria-label', 'Portada y letra de la canción');
-listeningDialog.innerHTML = `<div class="listening-top"><span>MEOWZONE / AHORA SUENA</span><button type="button" class="listening-close" aria-label="Cerrar portada y letra">×</button></div><div class="listening-grid"><div class="listening-art"><img alt=""><p>THREE CATS ✦ NINE LIVES ✦ ONE DESTINY</p></div><div class="listening-copy"><span class="eyebrow">Portada y letra</span><h2></h2><p class="lyrics-source"></p><div class="karaoke" aria-label="Letra siguiendo la reproducción"><span class="karaoke-section"></span><p class="karaoke-prev"></p><p class="karaoke-current" aria-live="off"></p><p class="karaoke-next"></p><div class="karaoke-progress"><span></span></div><div class="karaoke-controls"><button type="button" class="lyrics-earlier" aria-label="Adelantar letra dos segundos">−2 s</button><span class="lyrics-offset">Ajusta el desfase si hace falta</span><button type="button" class="lyrics-later" aria-label="Retrasar letra dos segundos">+2 s</button></div></div><details class="full-lyrics"><summary>Ver letra completa</summary><div class="lyrics-text"></div></details></div></div>`;
+listeningDialog.innerHTML = `<div class="listening-top"><span>MEOWZONE / AHORA SUENA</span><button type="button" class="listening-close" aria-label="Cerrar portada y letra">×</button></div><div class="listening-grid"><div class="listening-art"><img alt=""><p>THREE CATS ✦ NINE LIVES ✦ ONE DESTINY</p></div><div class="listening-copy"><span class="eyebrow">Portada y letra</span><h2></h2><p class="lyrics-source"></p><div class="karaoke" aria-label="Letra siguiendo la reproducción"><span class="karaoke-section"></span><p class="karaoke-prev"></p><p class="karaoke-current" aria-live="off"></p><p class="karaoke-next"></p><div class="karaoke-progress"><span></span></div><div class="karaoke-controls"><button type="button" class="lyrics-earlier" aria-label="Adelantar letra dos segundos">−2 s</button><span class="lyrics-offset">Ajusta el desfase si hace falta</span><button type="button" class="lyrics-later" aria-label="Retrasar letra dos segundos">+2 s</button></div></div><details class="full-lyrics"><summary>Ver letra completa</summary><div class="lyrics-text"></div></details><div class="lyric-report"><button type="button" class="lyric-report-toggle" aria-expanded="false">⚑ Reportar un problema con la letra</button><form class="lyric-report-form" hidden><p class="lyric-report-help">Enviaremos tu aviso al creador con la canción y el minuto. No necesitas indicar tu correo.</p><p class="lyric-report-context"></p><label>¿Qué falla?<select name="tipo"><option value="Letra incorrecta">La letra es incorrecta</option><option value="Desfase">La letra va adelantada o atrasada</option><option value="Letra ausente">Falta la letra</option><option value="Otro">Otro problema</option></select></label><label>¿Qué deberíamos corregir?<textarea name="detalle" rows="3" maxlength="1000" placeholder="Explica el fallo para que podamos encontrarlo" required></textarea></label><label class="lyric-report-honeypot" aria-hidden="true">No rellenar<input name="botcheck" tabindex="-1" autocomplete="off"></label><button type="submit" class="lyric-report-send">Enviar aviso</button><p class="lyric-report-status" role="status" aria-live="polite"></p><small>El informe se envía mediante Web3Forms.</small></form></div></div></div>`;
 document.body.append(listeningDialog);
 listeningDialog.querySelector('.listening-close').addEventListener('click', () => listeningDialog.close());
 listeningDialog.addEventListener('click', event => { if (event.target === listeningDialog) listeningDialog.close(); });
 let activeTrack = null;
 let timedLyrics = [];
 let lyricOffset = 0;
+let reportSnapshot = null;
+const lyricsReportAccessKey = '40be3733-47e6-4217-b3d5-eec9676156e9';
+const lyricsReportForm = listeningDialog.querySelector('.lyric-report-form');
+const lyricsReportToggle = listeningDialog.querySelector('.lyric-report-toggle');
+function reportTime(seconds) {
+  const safe = Math.max(0, Math.floor(Number.isFinite(seconds) ? seconds : 0));
+  return `${String(Math.floor(safe / 60)).padStart(2, '0')}:${String(safe % 60).padStart(2, '0')}`;
+}
+function captureLyricReport() {
+  return {
+    title: activeTrack.title,
+    file: activeTrack.file,
+    time: reportTime(audio.currentTime),
+    line: listeningDialog.querySelector('.karaoke-current').textContent.trim(),
+    offset: lyricOffset
+  };
+}
+lyricsReportToggle.addEventListener('click', () => {
+  if (!activeTrack) return;
+  const open = lyricsReportForm.hidden;
+  lyricsReportForm.hidden = !open;
+  lyricsReportToggle.setAttribute('aria-expanded', String(open));
+  if (!open) return;
+  reportSnapshot = captureLyricReport();
+  lyricsReportForm.querySelector('.lyric-report-context').textContent = `${reportSnapshot.title} · ${reportSnapshot.time}`;
+  lyricsReportForm.querySelector('.lyric-report-status').textContent = '';
+  lyricsReportForm.querySelector('textarea').focus();
+});
+lyricsReportForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!activeTrack || !reportSnapshot) return;
+  const sendButton = lyricsReportForm.querySelector('.lyric-report-send');
+  const status = lyricsReportForm.querySelector('.lyric-report-status');
+  sendButton.disabled = true;
+  status.textContent = 'Enviando aviso…';
+  try {
+    const fields = new FormData(lyricsReportForm);
+    fields.append('access_key', lyricsReportAccessKey);
+    fields.append('subject', `MeowZone · problema de letra: ${reportSnapshot.title}`);
+    fields.append('from_name', 'MeowZone web');
+    fields.append('cancion', reportSnapshot.title);
+    fields.append('archivo', reportSnapshot.file);
+    fields.append('momento', reportSnapshot.time);
+    fields.append('linea_visible', reportSnapshot.line);
+    fields.append('desfase_segundos', String(reportSnapshot.offset));
+    fields.append('pagina', location.hostname === 'zorentradico.github.io' ? location.origin + location.pathname : 'Copia local');
+    const response = await fetch('https://api.web3forms.com/submit', {method: 'POST', body: fields});
+    const result = await response.json();
+    if (!response.ok || result.success !== true) throw new Error(result.message || 'Error al enviar');
+    status.textContent = 'Aviso enviado. ¡Gracias por ayudar a mejorar la letra!';
+    lyricsReportForm.reset();
+  } catch (_) {
+    status.textContent = 'No se pudo enviar el aviso. Comprueba la conexión e inténtalo de nuevo.';
+  } finally {
+    sendButton.disabled = false;
+  }
+});
 function lyricLines(raw) {
   let section = '';
   let gap = 0;
@@ -127,6 +184,10 @@ function playTrack(index, reveal = true) {
   listeningDialog.querySelector('h2').textContent = track.title;
   listeningDialog.querySelector('.lyrics-text').textContent = window.trackLyrics?.[track.file] || 'Letra no disponible.';
   listeningDialog.querySelector('.full-lyrics').open = false;
+  lyricsReportForm.hidden = true;
+  lyricsReportToggle.setAttribute('aria-expanded', 'false');
+  lyricsReportForm.reset();
+  reportSnapshot = null;
   rebuildTimedLyrics();
   if (reveal) showListeningDialog();
   audio.play().catch(() => {});
