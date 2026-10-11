@@ -1,5 +1,7 @@
 # MeowZone
 
-Web estática para GitHub Pages. Incluye música, portadas, letras y subtítulos temporizados obtenidos del canal MeowZone en YouTube. No incluye vídeos ni archivos WAV. La tienda es decorativa: no hay productos a la venta ni pedidos.
+[Abrir la web](https://zorentradico.github.io/MeowZone/)
 
-Para publicarla, sube el contenido de esta carpeta a la raíz de un repositorio y activa GitHub Pages desde Settings → Pages → Deploy from a branch → main → /(root).
+Web estática de MeowZone con música, portadas, biografías y letras sincronizadas con los subtítulos del [canal de YouTube](https://www.youtube.com/@MeowZone-music).
+
+La tienda es un escaparate decorativo: los productos son ficticios, no están a la venta y no se aceptan pedidos. Esta versión pública no incluye vídeos ni archivos WAV.
