@@ -53,10 +53,11 @@ function rebuildTimedLyrics() {
   const channelTimes = window.timedTrackLyrics?.[activeTrack.file];
   if (channelTimes?.length) {
     timedLyrics = channelTimes;
-    listeningDialog.querySelector('.lyrics-source').textContent = 'Tiempos de los subtítulos del canal MeowZone en YouTube. Puedes ajustar el desfase si hace falta.';
+    listeningDialog.querySelector('.lyrics-source').hidden = true;
     updateKaraoke();
     return;
   }
+  listeningDialog.querySelector('.lyrics-source').hidden = false;
   listeningDialog.querySelector('.lyrics-source').textContent = 'Seguimiento estimado · Esta canción no tiene subtítulos con tiempos.';
   const lines = lyricLines(window.trackLyrics?.[activeTrack.file] || 'Letra no disponible.');
   const duration = Number.isFinite(audio.duration) ? audio.duration : 210;
