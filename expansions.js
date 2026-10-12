@@ -182,7 +182,7 @@ if (lifeMap) {
   function selectLife(i) {
     const life = lives[i]; const cover = tracks[life.songs[0]];
     buttons.querySelectorAll('button').forEach((button,n)=>button.setAttribute('aria-pressed',String(n===i)));
-    panel.innerHTML = '<img src="'+coverPath(cover.cover)+'" alt="Portada de '+meowEscape(cover.title)+'"><div><span class="eyebrow">Vida '+(i+1)+' de 9</span><h2>'+life.name+'</h2><p>'+life.theme+'. Un recorrido temático por las canciones de MeowZone; no establece una cronología oficial.</p><p class="life-cats">Con Jinu, Taeo y Siwoo</p><div class="life-songs">'+life.songs.map(n=>'<a href="'+meowSongUrl(tracks[n])+'">'+meowEscape(tracks[n].title)+' →</a>').join('')+'</div></div>';
+    panel.innerHTML = '<img src="'+coverPath(cover.cover)+'" alt="Portada de '+meowEscape(cover.title)+'"><div><span class="eyebrow">Vida '+(i+1)+' de 9</span><h2>'+life.name+'</h2><p>'+life.theme+'.</p><p class="life-cats">Con Jinu, Taeo y Siwoo</p><div class="life-songs">'+life.songs.map(n=>'<a href="'+meowSongUrl(tracks[n])+'">'+meowEscape(tracks[n].title)+' →</a>').join('')+'</div></div>';
   }
   selectLife(0);
 }
@@ -190,9 +190,9 @@ const gallery = document.querySelector('#art-gallery');
 if (gallery) {
   const extras = [
     ['Logo MeowZone','Art/Logo MeowZone.png'],['Banner de MeowZone','Art/YT Banner.png'],
-    ['Jinu','Art/Ficha de personaje del ídolo felino Jinu.png'],
-    ['Taeo','Art/Hoja de personaje de Taeo en neón.png'],
-    ['Siwoo','Art/Ficha de personaje cyberpunk_ Siwoo.png'],
+    ['Jinu','Art/Portraits/Jinu.png'],
+    ['Taeo','Art/Portraits/Taeo.png'],
+    ['Siwoo','Art/Portraits/Siwoo.png'],
     ['Escenario 1','Art/Live Stage 1.png'],['Escenario 2','Art/Live Stage 2.png'],
     ['MeowZone IRL','Art/IRL MeowZone.png']
   ];
