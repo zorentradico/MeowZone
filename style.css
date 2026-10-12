@@ -49,3 +49,26 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 .lyric-report{margin-top:16px}.lyric-report-toggle{width:100%;padding:12px 16px;border:1px solid #9b5fcd;background:#251039;color:#f5e8ff;text-align:left;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}.lyric-report-toggle:hover,.lyric-report-toggle[aria-expanded="true"]{background:#4c226e}.lyric-report-form{display:grid;gap:12px;padding:16px;border:1px solid var(--line);border-top:0;background:#0b0618}.lyric-report-form[hidden]{display:none}.lyric-report-form p{margin:0}.lyric-report-help,.lyric-report-form small{color:#bba0d2;font-size:12px;line-height:1.5}.lyric-report-context{color:#e1b7ff;font-weight:800;font-size:13px}.lyric-report-form label{display:grid;gap:6px;color:#e9d8f8;font-size:12px;font-weight:700}.lyric-report-form select,.lyric-report-form textarea{width:100%;padding:10px;border:1px solid #704597;background:#170b29;color:#fff;font:inherit}.lyric-report-form textarea{resize:vertical;min-height:85px}.lyric-report-form select:focus-visible,.lyric-report-form textarea:focus-visible,.lyric-report-toggle:focus-visible,.lyric-report-send:focus-visible{outline:2px solid #d79aff;outline-offset:2px}.lyric-report-honeypot{position:absolute;left:-9999px;opacity:0;pointer-events:none}.lyric-report-send{justify-self:start;padding:10px 16px;border:0;background:#b66bf2;color:#160824;font-size:12px;font-weight:900;text-transform:uppercase;cursor:pointer}.lyric-report-send:disabled{opacity:.6;cursor:wait}.lyric-report-status{min-height:1.4em;color:#d5b3ef;font-size:12px;line-height:1.4}
+
+/* La portada completa y los controles permanecen visibles dentro del visor. */
+.listening-dialog{width:min(1260px,calc(100vw - 28px));max-height:calc(100dvh - 24px)}
+.listening-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;padding:24px}
+.listening-art img{display:block;width:100%;height:auto;max-height:calc(100dvh - 180px);aspect-ratio:auto;object-fit:contain;background:#090514}
+.modal-player{display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px;border:1px solid var(--line);background:#090514}
+.modal-play{width:40px;height:40px;flex:none;border:1px solid #a765e8;background:#4c2170;color:white;cursor:pointer;font-size:17px}
+.modal-seek{width:100%;min-width:0;accent-color:#bd73f7;cursor:pointer}
+.modal-current,.modal-duration{font-size:12px;font-variant-numeric:tabular-nums;color:#e4cdf5}
+.lyrics-source a{color:#d9a4ff;text-decoration:underline}
+.issue-button{position:fixed;right:18px;bottom:18px;z-index:58;border:1px solid #c482ff;background:#220d3bdc;color:#f4e8ff;padding:11px 15px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;box-shadow:0 8px 25px #0009;cursor:pointer}
+.with-player .issue-button{bottom:88px}
+.issue-button:hover{background:#5b2588}
+.issue-dialog{width:min(540px,calc(100vw - 24px));max-width:none;max-height:calc(100dvh - 24px);overflow:auto;padding:0;border:1px solid #aa69e5;background:#10091f;color:var(--ink);box-shadow:0 30px 100px #000c}
+.issue-dialog::backdrop{background:rgba(3,1,9,.82)}
+.issue-close{border:0;background:none;color:white;font-size:30px;cursor:pointer}
+.issue-form{display:grid;gap:14px;padding:24px}
+.issue-form h2{margin:0;font:900 42px/.95 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.issue-form p,.issue-form small{margin:0;color:#c9addc;font-size:13px;line-height:1.5}
+.issue-form label{display:grid;gap:7px;font-size:13px;font-weight:700}
+.issue-form select,.issue-form textarea{width:100%;padding:11px;border:1px solid #704597;background:#170b29;color:white;font:inherit}
+.issue-status{min-height:1.5em}
+@media(max-width:700px){.listening-grid{grid-template-columns:1fr;gap:12px;padding:15px}.listening-art{width:100%;max-width:none}.listening-art img{max-height:42dvh}.modal-player{margin-top:10px}.issue-button{right:8px;bottom:8px;padding:9px;font-size:10px}.with-player .issue-button{bottom:75px}}

@@ -12,6 +12,7 @@ const tracks = [
   {title:'Dust Dragon',file:'Dust Dragon.mp3',cover:'MeowZone - Dust Dragon.png',group:'Aventuras'},
   {title:'Infinity Box',file:'Infinity Box.mp3',cover:'MeowZone - Infinity Box.png',group:'Aventuras'},
   {title:'Cats.exe V2',file:'MeowZone - Cats.exe V2.mp3',cover:'Cats.exe V2.png',group:'Aventuras'},
+  {title:'Cats.exe',file:'Cats-exe.mp3',cover:'MeowZone Cats exe.png',group:'Aventuras'},
   {title:'LOAF',file:'MeowZone - LOAF.mp3',cover:'MeowZone LOAF.png',group:'Modo gato'},
   {title:'Zoomies Protocol',file:'Zoomies Protocol.mp3',cover:'MeowZone Zoomies.png',group:'Modo gato'},
   {title:'Personal Space',file:'Personal Space.mp3',cover:'MeowZone Personal Space.png',group:'Modo gato'},
@@ -19,8 +20,7 @@ const tracks = [
   {title:'Unsupervised Cats',file:'Unsupervised Cats.mp3',cover:'Unsupervised cats.png',group:'Modo gato'},
   {title:'Fursuit Mode',file:'Fursuit Mode.mp3',cover:'Fursuit Mode.png',group:'Modo gato'},
   {title:'Feline Instinct',file:'Feline Instinct.mp3',cover:'MeowZone - Feline Instinct.jpg',group:'Modo gato'},
-  {title:'Door Is Closed',file:'Door is closed.mp3',cover:'MeowZone - Door is Closed.png',group:'Modo gato'},
-  {title:'Cats.exe',file:'Cats-exe.mp3',cover:'MeowZone Cats exe.png',group:'Modo gato'}
+  {title:'Door Is Closed',file:'Door is closed.mp3',cover:'MeowZone - Door is Closed.png',group:'Modo gato'}
 ];
 const coverPath = name => 'Art/Covers/' + encodeURIComponent(name);
 const songPath = name => 'Songs/' + encodeURIComponent(name);
@@ -29,7 +29,7 @@ const audio = player?.querySelector('audio');
 const listeningDialog = document.createElement('dialog');
 listeningDialog.className = 'listening-dialog';
 listeningDialog.setAttribute('aria-label', 'Portada y letra de la canción');
-listeningDialog.innerHTML = `<div class="listening-top"><span>MEOWZONE / AHORA SUENA</span><button type="button" class="listening-close" aria-label="Cerrar portada y letra">×</button></div><div class="listening-grid"><div class="listening-art"><img alt=""><p>THREE CATS ✦ NINE LIVES ✦ ONE DESTINY</p></div><div class="listening-copy"><span class="eyebrow">Portada y letra</span><h2></h2><p class="lyrics-source"></p><div class="karaoke" aria-label="Letra siguiendo la reproducción"><span class="karaoke-section"></span><p class="karaoke-prev"></p><p class="karaoke-current" aria-live="off"></p><p class="karaoke-next"></p><div class="karaoke-progress"><span></span></div><div class="karaoke-controls"><button type="button" class="lyrics-earlier" aria-label="Adelantar letra dos segundos">−2 s</button><span class="lyrics-offset">Ajusta el desfase si hace falta</span><button type="button" class="lyrics-later" aria-label="Retrasar letra dos segundos">+2 s</button></div></div><details class="full-lyrics"><summary>Ver letra completa</summary><div class="lyrics-text"></div></details><div class="lyric-report"><button type="button" class="lyric-report-toggle" aria-expanded="false">⚑ Reportar un problema con la letra</button><form class="lyric-report-form" hidden><p class="lyric-report-help">Enviaremos tu aviso al creador con la canción y el minuto. No necesitas indicar tu correo.</p><p class="lyric-report-context"></p><label>¿Qué falla?<select name="tipo"><option value="Letra incorrecta">La letra es incorrecta</option><option value="Desfase">La letra va adelantada o atrasada</option><option value="Letra ausente">Falta la letra</option><option value="Otro">Otro problema</option></select></label><label>¿Qué deberíamos corregir?<textarea name="detalle" rows="3" maxlength="1000" placeholder="Explica el fallo para que podamos encontrarlo" required></textarea></label><label class="lyric-report-honeypot" aria-hidden="true">No rellenar<input name="botcheck" tabindex="-1" autocomplete="off"></label><button type="submit" class="lyric-report-send">Enviar aviso</button><p class="lyric-report-status" role="status" aria-live="polite"></p><small>El informe se envía mediante Web3Forms.</small></form></div></div></div>`;
+listeningDialog.innerHTML = `<div class="listening-top"><span>MEOWZONE / AHORA SUENA</span><button type="button" class="listening-close" aria-label="Cerrar portada y letra">×</button></div><div class="listening-grid"><div class="listening-art"><img alt=""><div class="modal-player"><button type="button" class="modal-play" aria-label="Pausar canción">❚❚</button><span class="modal-current">00:00</span><input class="modal-seek" type="range" min="0" max="100" value="0" aria-label="Progreso de la canción"><span class="modal-duration">00:00</span></div><p>THREE CATS ✦ NINE LIVES ✦ ONE DESTINY</p></div><div class="listening-copy"><span class="eyebrow">Portada y letra</span><h2></h2><p class="lyrics-source"></p><div class="karaoke" aria-label="Letra siguiendo la reproducción"><span class="karaoke-section"></span><p class="karaoke-prev"></p><p class="karaoke-current" aria-live="off"></p><p class="karaoke-next"></p><div class="karaoke-progress"><span></span></div><div class="karaoke-controls"><button type="button" class="lyrics-earlier" aria-label="Adelantar letra dos segundos">−2 s</button><span class="lyrics-offset">Ajusta el desfase si hace falta</span><button type="button" class="lyrics-later" aria-label="Retrasar letra dos segundos">+2 s</button></div></div><details class="full-lyrics"><summary>Ver letra completa</summary><div class="lyrics-text"></div></details><div class="lyric-report"><button type="button" class="lyric-report-toggle" aria-expanded="false">⚑ Reportar un problema con la letra</button><form class="lyric-report-form" hidden><p class="lyric-report-help">Enviaremos tu aviso al creador con la canción y el minuto. No necesitas indicar tu correo.</p><p class="lyric-report-context"></p><label>¿Qué falla?<select name="tipo"><option value="Letra incorrecta">La letra es incorrecta</option><option value="Desfase">La letra va adelantada o atrasada</option><option value="Letra ausente">Falta la letra</option><option value="Otro">Otro problema</option></select></label><label>¿Qué deberíamos corregir?<textarea name="detalle" rows="3" maxlength="1000" placeholder="Explica el fallo para que podamos encontrarlo" required></textarea></label><label class="lyric-report-honeypot" aria-hidden="true">No rellenar<input name="botcheck" tabindex="-1" autocomplete="off"></label><button type="submit" class="lyric-report-send">Enviar aviso</button><p class="lyric-report-status" role="status" aria-live="polite"></p><small>El informe se envía mediante Web3Forms.</small></form></div></div></div>`;
 document.body.append(listeningDialog);
 listeningDialog.querySelector('.listening-close').addEventListener('click', () => listeningDialog.close());
 listeningDialog.addEventListener('click', event => { if (event.target === listeningDialog) listeningDialog.close(); });
@@ -44,6 +44,25 @@ function reportTime(seconds) {
   const safe = Math.max(0, Math.floor(Number.isFinite(seconds) ? seconds : 0));
   return `${String(Math.floor(safe / 60)).padStart(2, '0')}:${String(safe % 60).padStart(2, '0')}`;
 }
+const modalPlay = listeningDialog.querySelector('.modal-play');
+const modalSeek = listeningDialog.querySelector('.modal-seek');
+function syncModalPlayer() {
+  if (!audio) return;
+  const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+  listeningDialog.querySelector('.modal-current').textContent = reportTime(audio.currentTime);
+  listeningDialog.querySelector('.modal-duration').textContent = reportTime(duration);
+  modalSeek.max = String(duration || 100);
+  if (!modalSeek.matches(':active')) modalSeek.value = String(audio.currentTime || 0);
+  modalPlay.textContent = audio.paused ? '▶' : '❚❚';
+  modalPlay.setAttribute('aria-label', audio.paused ? 'Reproducir canción' : 'Pausar canción');
+}
+modalPlay.addEventListener('click', () => { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); });
+modalSeek.addEventListener('input', () => {
+  if (!audio || !Number.isFinite(audio.duration)) return;
+  audio.currentTime = Number(modalSeek.value);
+  syncModalPlayer();
+});
+['timeupdate','loadedmetadata','durationchange','play','pause','ended'].forEach(name => audio?.addEventListener(name, syncModalPlayer));
 function captureLyricReport() {
   return {
     title: activeTrack.title,
@@ -110,7 +129,9 @@ function rebuildTimedLyrics() {
   const channelTimes = window.timedTrackLyrics?.[activeTrack.file];
   if (channelTimes?.length) {
     timedLyrics = channelTimes;
-    listeningDialog.querySelector('.lyrics-source').hidden = true;
+    const source = listeningDialog.querySelector('.lyrics-source');
+    source.hidden = activeTrack.file !== 'Dust Dragon.mp3';
+    if (!source.hidden) source.innerHTML = 'Letra original de <a href="https://suno.com/s/7ckXGaPiB53JmpCd" target="_blank" rel="noopener noreferrer">Suno ↗</a> · tiempos revisados por secciones; puedes ajustar el desfase.';
     updateKaraoke();
     return;
   }
@@ -191,6 +212,7 @@ function playTrack(index, reveal = true) {
   rebuildTimedLyrics();
   if (reveal) showListeningDialog();
   audio.play().catch(() => {});
+  syncModalPlayer();
 }
 document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => playTrack(Number(button.dataset.track))));
 player?.querySelector('.player-close')?.addEventListener('click', () => {audio.pause();audio.removeAttribute('src');audio.load();player.classList.remove('active');document.body.classList.remove('with-player');listeningDialog.close()});
@@ -216,3 +238,52 @@ if (songList) {
 }
 const toggle = document.querySelector('.menu-toggle');
 toggle?.addEventListener('click', () => {const nav=document.querySelector('.site-nav'); const open=nav.classList.toggle('open'); toggle.setAttribute('aria-expanded',String(open));});
+
+// Reportes generales visibles en todas las páginas, sin pedir datos personales.
+const issueButton = document.createElement('button');
+issueButton.type = 'button';
+issueButton.className = 'issue-button';
+issueButton.textContent = '⚑ Informar de un fallo';
+issueButton.setAttribute('aria-label', 'Informar de un fallo en MeowZone');
+const issueDialog = document.createElement('dialog');
+issueDialog.className = 'issue-dialog';
+issueDialog.setAttribute('aria-label', 'Informar de un fallo');
+issueDialog.innerHTML = `<div class="listening-top"><span>MEOWZONE / INCIDENCIAS</span><button type="button" class="issue-close" aria-label="Cerrar formulario">×</button></div><form class="issue-form"><h2>¿Has visto algún fallo?</h2><p>Cuéntanos qué ocurre y dónde. Incluiremos automáticamente la página, el tipo de dispositivo y el navegador para facilitar la revisión. No necesitamos tu correo.</p><label>Tipo de problema<select name="tipo" required><option value="Visual">Diseño o imagen</option><option value="Reproductor">Reproductor</option><option value="Letra">Letra</option><option value="Enlace">Enlace</option><option value="Otro">Otro</option></select></label><label>¿Qué ha pasado?<textarea name="detalle" maxlength="1200" rows="5" placeholder="Describe el fallo y cómo se puede repetir" required></textarea></label><label class="lyric-report-honeypot" aria-hidden="true">No rellenar<input name="botcheck" tabindex="-1" autocomplete="off"></label><button type="submit" class="lyric-report-send">Enviar aviso</button><p class="issue-status" role="status" aria-live="polite"></p><small>El informe se envía mediante Web3Forms.</small></form>`;
+document.body.append(issueButton, issueDialog);
+issueButton.addEventListener('click', () => issueDialog.showModal());
+issueDialog.querySelector('.issue-close').addEventListener('click', () => issueDialog.close());
+issueDialog.addEventListener('click', event => { if (event.target === issueDialog) issueDialog.close(); });
+function visitorContext() {
+  const ua = navigator.userAgent;
+  let platform = navigator.userAgentData?.platform || (/(iPhone|iPad|iPod)/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Macintosh/.test(ua) ? 'macOS' : /Linux/.test(ua) ? 'Linux' : 'Otro');
+  const browser = /Edg\//.test(ua) ? 'Edge' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'Otro';
+  return {platform, browser, format: matchMedia('(max-width: 700px)').matches ? 'Móvil / pantalla estrecha' : 'Escritorio / pantalla ancha'};
+}
+issueDialog.querySelector('form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const send = form.querySelector('button[type="submit"]');
+  const status = form.querySelector('.issue-status');
+  send.disabled = true;
+  status.textContent = 'Enviando aviso…';
+  try {
+    const context = visitorContext();
+    const fields = new FormData(form);
+    fields.append('access_key', lyricsReportAccessKey);
+    fields.append('subject', `MeowZone · incidencia: ${fields.get('tipo')}`);
+    fields.append('from_name', 'MeowZone web');
+    fields.append('pagina', location.hostname === 'zorentradico.github.io' ? location.origin + location.pathname : 'Copia local');
+    fields.append('plataforma', context.platform);
+    fields.append('navegador', context.browser);
+    fields.append('formato', context.format);
+    const response = await fetch('https://api.web3forms.com/submit', {method:'POST', body:fields});
+    const result = await response.json();
+    if (!response.ok || result.success !== true) throw new Error(result.message || 'Error al enviar');
+    status.textContent = 'Aviso enviado. ¡Gracias!';
+    form.reset();
+  } catch (_) {
+    status.textContent = 'No se pudo enviar. Comprueba la conexión e inténtalo de nuevo.';
+  } finally {
+    send.disabled = false;
+  }
+});
