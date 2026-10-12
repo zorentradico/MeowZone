@@ -193,6 +193,7 @@ function playTrack(index, reveal = true) {
   if (!player || !audio || !tracks[index]) return;
   const track = tracks[index];
   activeTrack = track;
+  audio.dataset.meowTrack = track.file;
   try { lyricOffset = Number(localStorage.getItem('meowzone-lyrics-' + track.file)) || 0; } catch (_) { lyricOffset = 0; }
   audio.src = songPath(track.file);
   player.querySelector('img').src = coverPath(track.cover);
@@ -216,7 +217,7 @@ function playTrack(index, reveal = true) {
 }
 document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => playTrack(Number(button.dataset.track))));
 player?.querySelector('.player-close')?.addEventListener('click', () => {audio.pause();audio.removeAttribute('src');audio.load();player.classList.remove('active');document.body.classList.remove('with-player');listeningDialog.close()});
-if (audio) audio.addEventListener('ended', () => { const index = tracks.findIndex(t => audio.src.endsWith(encodeURIComponent(t.file))); if (index >= 0 && index < tracks.length - 1) playTrack(index + 1, false); });
+if (audio) audio.addEventListener('ended', () => { if (window.meowzoneNextTrack?.()) return; const index = tracks.findIndex(t => audio.src.endsWith(encodeURIComponent(t.file))); if (index >= 0 && index < tracks.length - 1) playTrack(index + 1, false); });
 
 const songList = document.querySelector('#song-list');
 if (songList) {
