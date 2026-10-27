@@ -171,7 +171,7 @@ if (lifeMap) {
     {name:'Misión nocturna',theme:'Sigilo, estrategia y sorpresas',songs:[8,9],cats:['Jinu','Taeo','Siwoo']},
     {name:'El desierto',theme:'Una aventura bajo el sol y el polvo',songs:[10,11],cats:['Jinu','Taeo','Siwoo']},
     {name:'Modo digital',theme:'Los gatos toman la red',songs:[12,13,19],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Instinto felino',theme:'Descanso, carreras, alturas y travesuras',songs:[14,15,16,20,21,22],cats:['Jinu','Taeo','Siwoo']},
+    {name:'Instinto felino',theme:'Descanso, carreras, alturas y travesuras',songs:[14,15,16,20,21,22,23],cats:['Jinu','Taeo','Siwoo']},
     {name:'Todas las vidas',theme:'El color y el caos siguen abiertos',songs:[17,18],cats:['Jinu','Taeo','Siwoo']}
   ];
   const buttons = lifeMap.querySelector('.life-buttons');

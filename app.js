@@ -21,7 +21,8 @@ const tracks = [
   {title:'Fursuit Mode',file:'Fursuit Mode.mp3',cover:'Fursuit Mode.png',group:'Modo gato'},
   {title:'Feline Instinct',file:'Feline Instinct.mp3',cover:'MeowZone - Feline Instinct.jpg',group:'Modo gato'},
   {title:'Door Is Closed',file:'Door is closed.mp3',cover:'MeowZone - Door is Closed.png',group:'Modo gato'},
-  {title:'The Floor Can Wait',file:'The Floor Can Wait.mp3',cover:'MeowZone - The Floor Can Wait.png',group:'Modo gato'}
+  {title:'The Floor Can Wait',file:'The Floor Can Wait.mp3',cover:'MeowZone - The Floor Can Wait.png',group:'Modo gato'},
+  {title:'Paws Off, Stay Close',file:'Paws Off, Stay Close.mp3',cover:'MeowZone - Paws Off, Stay Close.png',group:'Modo gato'}
 ];
 const coverPath = name => 'Art/Covers/' + encodeURIComponent(name);
 const songPath = name => 'Songs/' + encodeURIComponent(name);
