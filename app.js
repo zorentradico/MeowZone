@@ -133,7 +133,7 @@ function rebuildTimedLyrics() {
     timedLyrics = channelTimes;
     const source = listeningDialog.querySelector('.lyrics-source');
     source.hidden = activeTrack.file !== 'Dust Dragon.mp3';
-    if (!source.hidden) source.innerHTML = 'Letra original de <a href="https://suno.com/s/7ckXGaPiB53JmpCd" target="_blank" rel="noopener noreferrer">Suno ↗</a> · tiempos revisados por secciones; puedes ajustar el desfase.';
+    if (!source.hidden) source.innerHTML = 'Tiempos revisados por secciones; puedes ajustar el desfase.';
     updateKaraoke();
     return;
   }
