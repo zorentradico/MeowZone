@@ -22,7 +22,10 @@ const tracks = [
   {title:'Feline Instinct',file:'Feline Instinct.mp3',cover:'MeowZone - Feline Instinct.jpg',group:'Modo gato'},
   {title:'Door Is Closed',file:'Door is closed.mp3',cover:'MeowZone - Door is Closed.png',group:'Modo gato'},
   {title:'The Floor Can Wait',file:'The Floor Can Wait.mp3',cover:'MeowZone - The Floor Can Wait.png',group:'Modo gato'},
-  {title:'Paws Off, Stay Close',file:'Paws Off, Stay Close.mp3',cover:'MeowZone - Paws Off, Stay Close.png',group:'Modo gato'}
+  {title:'Paws Off, Stay Close',file:'Paws Off, Stay Close.mp3',cover:'MeowZone - Paws Off, Stay Close.png',group:'Modo gato'},
+  {title:'Double Trouble',file:'MeowZone - Double Trouble.mp3',cover:'MeowZone - Double Trouble v5.png',group:'Esenciales'},
+  {title:'Purranormal Activity',file:'PURRANORMAL ACTIVITY.mp3',cover:'Purranormal Halloween Special.png',group:'Aventuras'},
+  {title:'Seven Seas, Nine Lives',file:'Seven Seas, Nine Lives.mp3',cover:'MeowZone - Seven Seas, Nine Lives v3.png',group:'Aventuras'}
 ];
 const coverPath = name => 'Art/Covers/' + encodeURIComponent(name);
 const songPath = name => 'Songs/' + encodeURIComponent(name);
