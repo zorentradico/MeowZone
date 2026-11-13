@@ -161,31 +161,6 @@ if (songPage) {
   ['timeupdate','play','pause','seeked','ended'].forEach(event => audio?.addEventListener(event,syncPage));
   meowUpdateLibrary();
 }
-const lifeMap = document.querySelector('#life-map');
-if (lifeMap) {
-  const lives = [
-    {name:'La chispa',theme:'Los primeros pasos del trío',songs:[0,1],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Volver a empezar',theme:'Caer, regresar y seguir adelante',songs:[2,3],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Luces de neón',theme:'Una fiesta y una promesa de futuro',songs:[4,6],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Saltos imposibles',theme:'El tiempo y las fronteras se pliegan',songs:[5,7],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Misión nocturna',theme:'Sigilo, estrategia y sorpresas',songs:[8,9],cats:['Jinu','Taeo','Siwoo']},
-    {name:'El desierto',theme:'Una aventura bajo el sol y el polvo',songs:[10,11],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Modo digital',theme:'Los gatos toman la red',songs:[12,13,19],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Instinto felino',theme:'Descanso, carreras, alturas y travesuras',songs:[14,15,16,20,21,22,23],cats:['Jinu','Taeo','Siwoo']},
-    {name:'Todas las vidas',theme:'El color y el caos siguen abiertos',songs:[17,18],cats:['Jinu','Taeo','Siwoo']}
-  ];
-  const buttons = lifeMap.querySelector('.life-buttons');
-  const panel = lifeMap.querySelector('.life-panel');
-  lives.forEach((life,i) => {
-    const button = document.createElement('button'); button.type='button'; button.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+life.name; button.addEventListener('click',()=>selectLife(i)); buttons.append(button);
-  });
-  function selectLife(i) {
-    const life = lives[i]; const cover = tracks[life.songs[0]];
-    buttons.querySelectorAll('button').forEach((button,n)=>button.setAttribute('aria-pressed',String(n===i)));
-    panel.innerHTML = '<img src="'+coverPath(cover.cover)+'" alt="Portada de '+meowEscape(cover.title)+'"><div><span class="eyebrow">Vida '+(i+1)+' de 9</span><h2>'+life.name+'</h2><p>'+life.theme+'.</p><p class="life-cats">Con Jinu, Taeo y Siwoo</p><div class="life-songs">'+life.songs.map(n=>'<a href="'+meowSongUrl(tracks[n])+'">'+meowEscape(tracks[n].title)+' →</a>').join('')+'</div></div>';
-  }
-  selectLife(0);
-}
 const gallery = document.querySelector('#art-gallery');
 if (gallery) {
   const extras = [
